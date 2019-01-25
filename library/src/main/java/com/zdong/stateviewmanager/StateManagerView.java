@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -19,6 +18,10 @@ import com.zdong.stateviewmanager.mananger.StateViewObserver;
 import com.zdong.stateviewmanager.state.IStateView;
 import com.zdong.stateviewmanager.state.StateProperty;
 
+/**
+ *
+ * @author zoudong
+ */
 public class StateManagerView extends FrameLayout implements StateViewObserver, StateObservable<View> {
 
     StateManager mStateManager;
@@ -50,9 +53,22 @@ public class StateManagerView extends FrameLayout implements StateViewObserver, 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        Log.e("zoudong", "onFinishInflate====" + "");
-    }
+        if (getChildCount() > 1) {
+            try {
+                throw new IllegalStateException("StateManagerView can have only one direct child");
 
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+        } else if (getChildCount() == 1) {
+            loadCoreView(getChildAt(0));
+        }
+    }
+    private void loadCoreView(View child) {
+        if (child != null) {
+            mStateManager.setContentView(child);
+        }
+    }
     @Override
     public boolean addState(IStateView changger) {
         return mStateManager.addState(changger);
@@ -102,7 +118,7 @@ public class StateManagerView extends FrameLayout implements StateViewObserver, 
         }
 
         public Builder wrapper(View view) {
-            mStateManagerView.wrapper(view);
+            mStateManagerView.loadCoreView(view);
             return this;
         }
 
@@ -111,19 +127,4 @@ public class StateManagerView extends FrameLayout implements StateViewObserver, 
         }
     }
 
-    private void wrapper(View view) {
-        ViewParent parent = view.getParent();
-        if (null == parent) {
-            this.addView(view, new FrameLayout.LayoutParams(-1, -1));
-        } else if (this != parent) {
-            if (parent instanceof ViewGroup) {
-                ViewGroup viewGroup = (ViewGroup) parent;
-                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-                int index = viewGroup.indexOfChild(view);
-                viewGroup.removeView(view);
-                this.addView(view, new FrameLayout.LayoutParams(layoutParams.width, layoutParams.height));
-                viewGroup.addView(this, index, layoutParams);
-            }
-        }
-    }
 }

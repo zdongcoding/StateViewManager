@@ -11,12 +11,6 @@ import com.zdong.stateviewmanager.mananger.StateActionListener;
  */
 public interface IStateView<T extends StateProperty> {
 
-     String EMPTY = "empty_state_view";
-     String EXCEPTION = "exception_state_view";
-     String LAODING = "loading_state_view";
-     String NETERROR = "net_error_state_view";
-
-     String ERROR = "error_state";
     /**
      * StateView创建后，可以做一些操作
      * @param parent
@@ -34,7 +28,10 @@ public interface IStateView<T extends StateProperty> {
      */
     void onStatePause();
 
-
+    /**
+     * StateView#remove
+     */
+    void onStateDestory();
     /**
      * 获取当前状态
      *

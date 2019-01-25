@@ -2,7 +2,6 @@ package com.zdong.stateviewmanager;
 
 import android.util.Log;
 import android.view.View;
-
 import com.zdong.stateviewmanager.state.BaseStateView;
 
 public class LoadingStateView extends BaseStateView {
@@ -20,7 +19,8 @@ public class LoadingStateView extends BaseStateView {
     @Override
     public void onStateResume() {
         super.onStateResume();
-        Log.e("zoudong", "onStateResume====" + "");
+
+        Log.e("zoudong", "onStateResume====" + getState());
     }
 
     @Override

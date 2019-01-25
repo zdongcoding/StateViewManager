@@ -77,6 +77,12 @@ public abstract class BaseStateView<T extends StateProperty> implements IStateVi
 
     }
 
+    @Override
+    public void onStateDestory() {
+
+    }
+
+    @Override
     public void setStateActionListener(StateActionListener listener) {
         this.stateActionListener = listener;
     }

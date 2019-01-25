@@ -1,6 +1,7 @@
 package com.zdong.stateviewmanager.mananger;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +34,32 @@ import com.zdong.stateviewmanager.state.IStateView;
                 return false;
             }
         }
-        if (overallView.indexOfChild(staterView) < 0 && staterView.getParent() == null) {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -1);
-            params.gravity = Gravity.CENTER;
-            overallView.addView(staterView, params);
+        ViewGroup.LayoutParams layoutParams = overallView.getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        if (overallView.indexOfChild(staterView) < 0) {
+            if (staterView.getParent() == null) {
+                overallView.addView(staterView, layoutParams);
+            } else if (staterView.getParent() !=overallView){
+                ViewGroup.LayoutParams params = staterView.getLayoutParams();
+                Log.e("zoudong", "params="+params);
+                if (staterView.getParent() instanceof ViewGroup) {
+                    ViewGroup staterViewParent = (ViewGroup) staterView.getParent();
+                    int ofChild = staterViewParent.indexOfChild(staterView);
+                    staterViewParent.removeViewInLayout(staterView);
+                    overallView.addView(staterView, layoutParams);
+                    staterViewParent.addView(overallView,ofChild,params);
+                }
+
+            }
         }
         stater.getView().setVisibility(View.VISIBLE);
         stater.onStateResume();
         return true;
     }
-
     /**
      * 隐藏视图
      * 如果stateView没有创建，则不做处理

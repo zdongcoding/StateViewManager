@@ -49,9 +49,9 @@ public class StateViewRepository implements StateObservable<View> {
     }
 
     @Override
-    public boolean addState(IStateView observable) {
-        if (observable != null && !TextUtils.isEmpty(observable.getState())) {
-            stateMap.put(observable.getState(), observable);
+    public boolean addState(IStateView iStateView) {
+        if (iStateView != null && !TextUtils.isEmpty(iStateView.getState())) {
+            stateMap.put(iStateView.getState(), iStateView);
             return true;
         }
 
@@ -61,6 +61,10 @@ public class StateViewRepository implements StateObservable<View> {
     @Override
     public boolean removeState(String state) {
         if (!TextUtils.isEmpty(state)) {
+            IStateView iStateView = get(state);
+            if (iStateView!=null) {
+                iStateView.onStateDestory();
+            }
             stateMap.remove(state);
             return true;
         }

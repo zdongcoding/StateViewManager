@@ -3,8 +3,10 @@ package com.zdong.stateviewmanager.mananger;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.zdong.stateviewmanager.creator.StateViewRepository;
 import com.zdong.stateviewmanager.state.BaseStateView;
@@ -43,6 +45,10 @@ public class StateManager implements IStateViewManager {
         stateManager.stateRepository = repository;
         stateManager.overallView = overallView;
         return stateManager;
+    }
+
+    public void setOverallView(ViewGroup overallView) {
+        this.overallView = overallView;
     }
 
     /*------------------------StateObserver------------------------------*/
@@ -96,6 +102,46 @@ public class StateManager implements IStateViewManager {
             IStateView stateChanger = iterator.next();
             stateChanger.setStateActionListener(listener);
         }
+    }
+    @Override
+    public ViewGroup getOverallView() {
+        return overallView;
+    }
+
+    @Override
+    public View setContentView(int resId) {
+
+        if (overallView == null) {
+            overallView = new FrameLayout(context);
+            overallView.setLayoutParams(
+                    new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+
+        View view = LayoutInflater.from(context).inflate(resId, overallView, false);
+        //注册核心view的State
+        addState(new CoreStateView(view));
+        showState(CoreStateView.STATE);
+
+        return overallView;
+    }
+
+    @Override
+    public View setContentView(View view) {
+        if (overallView == null) {
+
+            overallView = new FrameLayout(context);
+            overallView.setLayoutParams(
+                    new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+        //注册核心view的State
+        addState(new CoreStateView(view));
+        showState(CoreStateView.STATE);
+        return overallView;
+    }
+
+    @Override
+    public View getContentView() {
+        return getStateView(CoreStateView.STATE);
     }
 
 
@@ -170,6 +216,9 @@ public class StateManager implements IStateViewManager {
         stateRepository.addState(this.stateRepository.get(CoreStateView.STATE));
         this.stateRepository = stateRepository;
     }
+
+
+
     @Override
     public void onDestoryView() {
         overallView = null;
