@@ -1,4 +1,4 @@
-package com.zdong.stateviewmanager;
+package com.zdong.demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

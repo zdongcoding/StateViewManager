@@ -3,9 +3,9 @@ package com.zdong.stateviewmanager.mananger;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zdong.stateviewmanager.creator.StateObservable;
+import com.zdong.stateviewmanager.creator.StateLoader;
 
-public interface IStateViewManager extends  StateViewObserver, StateObservable<View> {
+public interface IStateViewManager extends StateViewChanger, StateLoader<View> {
 
 
     ViewGroup getOverallView();

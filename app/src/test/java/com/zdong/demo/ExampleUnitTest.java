@@ -1,4 +1,4 @@
-package com.zdong.stateviewmanager;
+package com.zdong.demo;
 
 import org.junit.Test;
 

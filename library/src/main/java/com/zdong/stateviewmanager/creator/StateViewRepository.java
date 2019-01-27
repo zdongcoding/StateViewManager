@@ -13,7 +13,7 @@ import java.util.HashMap;
  * 状态仓库
  * @author zoudong
  */
-public class StateViewRepository implements StateObservable<View> {
+public class StateViewRepository implements StateLoader<View> {
     /**
      * 注册 状态
      * @param state

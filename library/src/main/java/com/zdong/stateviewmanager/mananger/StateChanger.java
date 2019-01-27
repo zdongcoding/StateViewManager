@@ -6,7 +6,7 @@ import com.zdong.stateviewmanager.state.StateProperty;
 /**
  * 状态观察者
  */
-public interface StateObserver {
+public interface StateChanger {
 
     /**
      * 当前需要显示的StateView

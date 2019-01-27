@@ -1,7 +1,8 @@
-package com.zdong.stateviewmanager;
+package com.zdong.demo;
 
 import android.util.Log;
 import android.view.View;
+
 import com.zdong.stateviewmanager.state.BaseStateView;
 
 public class LoadingStateView extends BaseStateView {

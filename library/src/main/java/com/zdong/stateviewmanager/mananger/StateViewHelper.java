@@ -13,7 +13,7 @@ import com.zdong.stateviewmanager.state.IStateView;
 /**
  * StateView控制器，控制StateView显示、隐藏、创建
  */
- class StateViewHelper {
+class StateViewHelper {
 
     /**
      * 显示视图
@@ -23,7 +23,7 @@ import com.zdong.stateviewmanager.state.IStateView;
      */
     public static boolean showStateView(Context context, ViewGroup overallView, IStateView stater) {
 
-        if (stater == null || overallView ==null) {
+        if (stater == null || overallView == null) {
             return false;
         }
         View staterView = stater.getView();
@@ -38,20 +38,17 @@ import com.zdong.stateviewmanager.state.IStateView;
         if (layoutParams == null) {
             layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
-        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
         if (overallView.indexOfChild(staterView) < 0) {
             if (staterView.getParent() == null) {
-                overallView.addView(staterView, layoutParams);
+                overallView.addView(staterView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             } else if (staterView.getParent() !=overallView){
                 ViewGroup.LayoutParams params = staterView.getLayoutParams();
-                Log.e("zoudong", "params="+params);
                 if (staterView.getParent() instanceof ViewGroup) {
                     ViewGroup staterViewParent = (ViewGroup) staterView.getParent();
                     int ofChild = staterViewParent.indexOfChild(staterView);
                     staterViewParent.removeViewInLayout(staterView);
                     overallView.addView(staterView, layoutParams);
-                    staterViewParent.addView(overallView,ofChild,params);
+                    staterViewParent.addView(overallView, ofChild, params);
                 }
 
             }
@@ -60,6 +57,7 @@ import com.zdong.stateviewmanager.state.IStateView;
         stater.onStateResume();
         return true;
     }
+
     /**
      * 隐藏视图
      * 如果stateView没有创建，则不做处理

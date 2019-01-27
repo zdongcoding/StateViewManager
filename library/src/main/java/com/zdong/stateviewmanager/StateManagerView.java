@@ -2,19 +2,16 @@ package com.zdong.stateviewmanager;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 
-import com.zdong.stateviewmanager.creator.StateObservable;
+import com.zdong.stateviewmanager.creator.StateLoader;
 import com.zdong.stateviewmanager.creator.StateViewRepository;
 import com.zdong.stateviewmanager.mananger.StateActionListener;
 import com.zdong.stateviewmanager.mananger.StateManager;
-import com.zdong.stateviewmanager.mananger.StateViewObserver;
+import com.zdong.stateviewmanager.mananger.StateViewChanger;
 import com.zdong.stateviewmanager.state.IStateView;
 import com.zdong.stateviewmanager.state.StateProperty;
 
@@ -22,7 +19,7 @@ import com.zdong.stateviewmanager.state.StateProperty;
  *
  * @author zoudong
  */
-public class StateManagerView extends FrameLayout implements StateViewObserver, StateObservable<View> {
+public class StateManagerView extends FrameLayout implements StateViewChanger, StateLoader<View> {
 
     StateManager mStateManager;
 
@@ -47,7 +44,6 @@ public class StateManagerView extends FrameLayout implements StateViewObserver, 
 
     private void init() {
         mStateManager = StateManager.newInstance(getContext(), new StateViewRepository(getContext()), this);
-        setBackgroundColor(Color.RED);
     }
 
     @Override
@@ -118,11 +114,11 @@ public class StateManagerView extends FrameLayout implements StateViewObserver, 
         }
 
         public Builder wrapper(View view) {
-            mStateManagerView.loadCoreView(view);
+            mStateManagerView.mStateManager.setContentView(view);
             return this;
         }
 
-        public StateViewObserver observer() {
+        public StateViewChanger builder() {
             return mStateManagerView;
         }
     }

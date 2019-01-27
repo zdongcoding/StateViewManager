@@ -9,7 +9,7 @@ import com.zdong.stateviewmanager.state.IStateView;
  *
  * @author zoudong
  */
-public interface StateObservable<T> {
+public interface StateLoader<T> {
 
 
     /**
