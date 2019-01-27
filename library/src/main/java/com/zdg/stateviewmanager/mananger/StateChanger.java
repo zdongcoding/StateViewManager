@@ -1,7 +1,7 @@
-package com.zdong.stateviewmanager.mananger;
+package com.zdg.stateviewmanager.mananger;
 
 
-import com.zdong.stateviewmanager.state.StateProperty;
+import com.zdg.stateviewmanager.state.StateProperty;
 
 /**
  * 状态观察者

@@ -1,4 +1,4 @@
-package com.zdong.stateviewmanager.mananger;
+package com.zdg.stateviewmanager.mananger;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.zdong.stateviewmanager.creator.StateViewRepository;
-import com.zdong.stateviewmanager.state.BaseStateView;
-import com.zdong.stateviewmanager.state.CoreStateView;
-import com.zdong.stateviewmanager.state.IStateView;
-import com.zdong.stateviewmanager.state.StateProperty;
+import com.zdg.stateviewmanager.creator.StateViewRepository;
+import com.zdg.stateviewmanager.state.BaseStateView;
+import com.zdg.stateviewmanager.state.CoreStateView;
+import com.zdg.stateviewmanager.state.IStateView;
+import com.zdg.stateviewmanager.state.StateProperty;
 
 import java.util.Iterator;
 

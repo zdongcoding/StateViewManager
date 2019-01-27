@@ -1,7 +1,7 @@
-package com.zdong.stateviewmanager.creator;
+package com.zdg.stateviewmanager.creator;
 
 
-import com.zdong.stateviewmanager.state.IStateView;
+import com.zdg.stateviewmanager.state.IStateView;
 
 
 /**

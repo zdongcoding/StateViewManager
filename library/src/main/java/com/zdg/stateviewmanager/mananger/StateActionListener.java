@@ -1,4 +1,4 @@
-package com.zdong.stateviewmanager.mananger;
+package com.zdg.stateviewmanager.mananger;
 
 import android.view.View;
 

@@ -1,11 +1,11 @@
-package com.zdong.stateviewmanager.state;
+package com.zdg.stateviewmanager.state;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zdong.stateviewmanager.mananger.StateActionListener;
+import com.zdg.stateviewmanager.mananger.StateActionListener;
 
 
 /**

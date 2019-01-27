@@ -1,11 +1,11 @@
-package com.zdong.stateviewmanager.creator;
+package com.zdg.stateviewmanager.creator;
 
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
 
-import com.zdong.stateviewmanager.state.IStateView;
+import com.zdg.stateviewmanager.state.IStateView;
 
 import java.util.HashMap;
 

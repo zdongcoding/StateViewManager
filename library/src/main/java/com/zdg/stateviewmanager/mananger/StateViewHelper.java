@@ -1,13 +1,10 @@
-package com.zdong.stateviewmanager.mananger;
+package com.zdg.stateviewmanager.mananger;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.zdong.stateviewmanager.state.IStateView;
+import com.zdg.stateviewmanager.state.IStateView;
 
 
 /**

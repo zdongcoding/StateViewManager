@@ -3,7 +3,7 @@ package com.zdong.demo;
 import android.util.Log;
 import android.view.View;
 
-import com.zdong.stateviewmanager.state.BaseStateView;
+import com.zdg.stateviewmanager.state.BaseStateView;
 
 public class LoadingStateView extends BaseStateView {
     public static final String STATE = "Loading_state";

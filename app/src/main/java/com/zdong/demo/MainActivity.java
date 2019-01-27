@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.zdong.stateviewmanager.StateManagerView;
-import com.zdong.stateviewmanager.creator.StateViewRepository;
-import com.zdong.stateviewmanager.mananger.StateViewChanger;
+import com.zdg.stateviewmanager.StateManagerView;
+import com.zdg.stateviewmanager.creator.StateViewRepository;
+import com.zdg.stateviewmanager.mananger.StateViewChanger;
 
 public class MainActivity extends AppCompatActivity {
 

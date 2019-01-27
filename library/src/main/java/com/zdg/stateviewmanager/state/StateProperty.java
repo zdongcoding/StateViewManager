@@ -1,4 +1,4 @@
-package com.zdong.stateviewmanager.state;
+package com.zdg.stateviewmanager.state;
 
 /**
  * 自定义状态方案
