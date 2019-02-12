@@ -6,7 +6,7 @@ import android.view.View;
 import com.zdg.stateviewmanager.state.BaseStateView;
 
 public class LoadingStateView extends BaseStateView {
-    public static final String STATE = "Loading_state";
+    public static final String STATE = "loading_state";
     @Override
     protected int getLayoutId() {
         return R.layout.base_loading_layout;
@@ -20,14 +20,6 @@ public class LoadingStateView extends BaseStateView {
                 actionListener(v);
             }
         });
-        Log.e("zoudong", "onViewCreated====" + "stateView = [" + stateView + "]");
-    }
-
-    @Override
-    public void onStateResume() {
-        super.onStateResume();
-
-        Log.e("zoudong", "onStateResume====" + getState());
     }
 
     @Override

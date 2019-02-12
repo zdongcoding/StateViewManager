@@ -13,6 +13,7 @@ import com.zdg.stateviewmanager.state.BaseStateView;
 import com.zdg.stateviewmanager.state.CoreStateView;
 import com.zdg.stateviewmanager.state.IStateView;
 import com.zdg.stateviewmanager.state.StateProperty;
+import com.zdong.stateviewmanager.R;
 
 import java.util.Iterator;
 
@@ -82,11 +83,21 @@ public class StateManager implements IStateViewManager {
                 StateViewHelper.hideStateView(currentState);
             }
         }
-
         currentState = iState;
+        hideOtherStateView(currentState);
         return true;
     }
-
+    private  void hideOtherStateView(IStateView stater) {
+        ViewGroup parent = (ViewGroup) stater.getView().getParent();
+        int index = parent.indexOfChild(stater.getView());
+        for (int childCount = parent.getChildCount() - 1; childCount > index; childCount--) {
+//            Object tag = parent.getChildAt(childCount).getTag(R.id.state_tag);
+            Object other = parent.getChildAt(childCount).getTag(R.id.state_view);
+            if (other instanceof IStateView) {
+                StateViewHelper.hideStateView((IStateView) other);
+            }
+        }
+    }
     @Override
     public boolean showState(StateProperty state) {
         boolean result = showState(state.getState());

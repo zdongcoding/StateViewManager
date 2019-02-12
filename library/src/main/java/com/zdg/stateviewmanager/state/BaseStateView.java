@@ -1,6 +1,7 @@
 package com.zdg.stateviewmanager.state;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.zdg.stateviewmanager.mananger.StateActionListener;
  * @author zoudong
  */
 public abstract class BaseStateView<T extends StateProperty> implements IStateView<T> {
-
+    public static final String TAG = "BaseStateView";
     public static final String STATE = "NONE";
 
     protected Context context;
@@ -40,6 +41,7 @@ public abstract class BaseStateView<T extends StateProperty> implements IStateVi
 
     @Override
     public void onStateCreate(Context context, ViewGroup parent) {
+        Log.d(TAG, "onStateCreate====" + "context = [" + context + "], parent = [" + parent + "]");
         this.context = context;
         this.mOverallView = parent;
         stateView = LayoutInflater.from(context).inflate(getLayoutId(), parent, false);
@@ -70,16 +72,17 @@ public abstract class BaseStateView<T extends StateProperty> implements IStateVi
 
     @Override
     public void onStateResume() {
+        Log.d(TAG, "onStateResume====" + getState());
     }
 
     @Override
     public void onStatePause() {
-
+        Log.d(TAG, "onStatePause====" + getState());
     }
 
     @Override
     public void onStateDestroy() {
-
+        Log.d(TAG, "onStateDestroy====" + getState());
     }
 
     @Override

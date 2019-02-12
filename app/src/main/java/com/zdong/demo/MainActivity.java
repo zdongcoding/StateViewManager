@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         mObserver.setStateActionListener(new StateActionListener() {
             @Override
             public void onActionListener(String state, View view) {
-                if (state== ExceptionStateView.STATE) {
+                if (state == ExceptionStateView.STATE) {
                     if (view.getId()==R.id.btn_report) {
-                        mObserver.showState(CoreStateView.STATE);
+//                        mObserver.showState(CoreStateView.STATE);
+                        changeStateView(view);
                     }
                 }
                 Log.e("zoudong", "onActionListener====" + "state = [" + state + "], view = [" + view + "]");

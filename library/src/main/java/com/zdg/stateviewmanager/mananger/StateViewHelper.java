@@ -1,10 +1,17 @@
 package com.zdg.stateviewmanager.mananger;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.zdg.stateviewmanager.state.IStateView;
+import com.zdong.stateviewmanager.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -30,6 +37,8 @@ class StateViewHelper {
             if (staterView == null) {
                 return false;
             }
+            staterView.setTag(R.id.state_view,stater);
+            staterView.setTag(R.id.state_tag,stater.getState());
         }
         ViewGroup.LayoutParams layoutParams = overallView.getLayoutParams();
         if (layoutParams == null) {
@@ -37,8 +46,8 @@ class StateViewHelper {
         }
         if (overallView.indexOfChild(staterView) < 0) {
             if (staterView.getParent() == null) {
-                overallView.addView(staterView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            } else if (staterView.getParent() !=overallView){
+                overallView.addView(staterView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            } else if (staterView.getParent() != overallView) {
                 ViewGroup.LayoutParams params = staterView.getLayoutParams();
                 if (staterView.getParent() instanceof ViewGroup) {
                     ViewGroup staterViewParent = (ViewGroup) staterView.getParent();
