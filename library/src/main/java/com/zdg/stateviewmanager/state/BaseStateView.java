@@ -78,8 +78,13 @@ public abstract class BaseStateView<T extends StateProperty> implements IStateVi
     }
 
     @Override
-    public void onStateDestory() {
+    public void onStateDestroy() {
 
+    }
+
+    @Override
+    public ShowState getShowState() {
+        return ShowState.ONLY;
     }
 
     @Override
@@ -87,6 +92,11 @@ public abstract class BaseStateView<T extends StateProperty> implements IStateVi
         this.stateActionListener = listener;
     }
 
+    protected void actionListener(View view){
+        if (this.stateActionListener!=null) {
+            stateActionListener.onActionListener(getState(),view);
+        }
+    }
 
     public Context getContext() {
         return context;

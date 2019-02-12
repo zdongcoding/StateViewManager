@@ -14,6 +14,12 @@ public class LoadingStateView extends BaseStateView {
 
     @Override
     protected void onViewCreated(View stateView) {
+        stateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionListener(v);
+            }
+        });
         Log.e("zoudong", "onViewCreated====" + "stateView = [" + stateView + "]");
     }
 
@@ -27,5 +33,10 @@ public class LoadingStateView extends BaseStateView {
     @Override
     public String getState() {
         return STATE;
+    }
+
+    @Override
+    public ShowState getShowState() {
+        return ShowState.STACK;
     }
 }

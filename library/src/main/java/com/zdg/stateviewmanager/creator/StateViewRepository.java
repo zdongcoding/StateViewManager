@@ -63,7 +63,7 @@ public class StateViewRepository implements StateLoader<View> {
         if (!TextUtils.isEmpty(state)) {
             IStateView iStateView = get(state);
             if (iStateView!=null) {
-                iStateView.onStateDestory();
+                iStateView.onStateDestroy();
             }
             stateMap.remove(state);
             return true;

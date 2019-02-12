@@ -14,6 +14,7 @@ public interface IStateView<T extends StateProperty> {
 
     /**
      * StateView创建后，可以做一些操作
+     * @param context
      * @param parent
      */
     void onStateCreate(Context context, ViewGroup parent);
@@ -32,7 +33,7 @@ public interface IStateView<T extends StateProperty> {
     /**
      * StateView#remove
      */
-    void onStateDestory();
+    void onStateDestroy();
     /**
      * 获取当前状态
      *
@@ -55,9 +56,35 @@ public interface IStateView<T extends StateProperty> {
      */
     View getView();
 
-
+    ShowState getShowState();
     /**
      * 定制View里面控件的内容
+     * @param stateProperty
      */
     void setViewProperty(T stateProperty);
+
+    public class ShowState {
+        /**
+         *  只显示State显示的位置
+         */
+        public static ShowState ONLY=new ShowState(-1);
+        /**
+         *
+         */
+        public static ShowState STACK= new ShowState(0);
+
+        /**
+         *
+         * @param index ViewGroup（mOverallView#addView(index）
+         * @return ShowState
+         */
+        public static ShowState INDEX(int index){
+            return new ShowState(index);
+        }
+        int index;
+
+         private ShowState(int index) {
+            this.index=index;
+        }
+    }
 }

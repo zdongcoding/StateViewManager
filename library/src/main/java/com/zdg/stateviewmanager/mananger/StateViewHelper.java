@@ -42,10 +42,10 @@ class StateViewHelper {
                 ViewGroup.LayoutParams params = staterView.getLayoutParams();
                 if (staterView.getParent() instanceof ViewGroup) {
                     ViewGroup staterViewParent = (ViewGroup) staterView.getParent();
-                    int ofChild = staterViewParent.indexOfChild(staterView);
+                    int ofChildIndex = staterViewParent.indexOfChild(staterView);
                     staterViewParent.removeViewInLayout(staterView);
                     overallView.addView(staterView, layoutParams);
-                    staterViewParent.addView(overallView, ofChild, params);
+                    staterViewParent.addView(overallView, ofChildIndex, params);
                 }
 
             }

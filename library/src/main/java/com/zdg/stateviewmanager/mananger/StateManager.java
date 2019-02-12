@@ -22,9 +22,15 @@ import java.util.Iterator;
 public class StateManager implements IStateViewManager {
 
     private Context context;
-    private StateViewRepository stateRepository; //所有 状态管理的配置
+    /**
+     * 所有 状态管理的配置
+     */
+    private StateViewRepository stateRepository;
 
-    private IStateView currentState;  //当前显示的状态
+    /**
+     * 当前显示的状态
+     */
+    private IStateView currentState;
 
     private StateActionListener listener;
     private ViewGroup overallView;
@@ -72,7 +78,9 @@ public class StateManager implements IStateViewManager {
             if (currentState.getState().equals(state)) {
                 return true;
             }
-            StateViewHelper.hideStateView(currentState);
+            if (iState.getShowState()== IStateView.ShowState.ONLY) {
+                StateViewHelper.hideStateView(currentState);
+            }
         }
 
         currentState = iState;

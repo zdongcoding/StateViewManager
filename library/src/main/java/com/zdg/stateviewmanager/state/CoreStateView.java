@@ -50,6 +50,10 @@ public class CoreStateView extends BaseStateView {
 
     }
 
+    @Override
+    public ShowState getShowState() {
+        return ShowState.STACK;
+    }
 
     @Override
     public String getState() {
