@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        StateViewRepository.registerState(LoadingStateView.STATE,LoadingStateView.class);
-        StateViewRepository.registerState(ExceptionStateView.STATE,ExceptionStateView.class);
+        StateViewRepository.Instance.registerState(LoadingStateView.STATE,LoadingStateView.class);
+        StateViewRepository.Instance.registerState(ExceptionStateView.STATE,ExceptionStateView.class);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onActionListener(String state, View view) {
                 if (state == ExceptionStateView.STATE) {
                     if (view.getId()==R.id.btn_report) {
-//                        mObserver.showState(CoreStateView.STATE);
+                        mObserver.showState(CoreStateView.STATE);
                         changeStateView(view);
                     }
                 }

@@ -1,6 +1,5 @@
 package com.zdong.demo;
 
-import android.util.Log;
 import android.view.View;
 
 import com.zdg.stateviewmanager.state.BaseStateView;
@@ -27,8 +26,9 @@ public class LoadingStateView extends BaseStateView {
         return STATE;
     }
 
+
     @Override
     public ShowState getShowState() {
-        return ShowState.STACK;
+        return ShowState.getInstance.getSTACK();
     }
 }

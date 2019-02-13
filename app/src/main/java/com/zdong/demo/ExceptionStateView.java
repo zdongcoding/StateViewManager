@@ -1,6 +1,5 @@
 package com.zdong.demo;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
