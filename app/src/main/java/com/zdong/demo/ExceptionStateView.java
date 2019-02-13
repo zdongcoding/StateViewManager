@@ -37,6 +37,11 @@ public class ExceptionStateView extends BaseStateView<ExceptionData> {
     }
 
     @Override
+    public ShowState getShowState() {
+        return ShowState.ONLY;
+    }
+
+    @Override
     public String getState() {
         return STATE;
     }

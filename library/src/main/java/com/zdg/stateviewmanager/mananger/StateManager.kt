@@ -18,7 +18,7 @@ import com.zdong.stateviewmanager.R
 /**
  * 状态管理类
  */
-class StateManager protected constructor(private val context: Context) : IStateViewManager {
+class StateManager private constructor(private val context: Context) : IStateViewManager {
 
 
     /**
@@ -75,7 +75,7 @@ class StateManager protected constructor(private val context: Context) : IStateV
                 //Object tag = parent.getChildAt(childCount).getTag(R.id.state_tag);
                 val other = parent.getChildAt(childCount).getTag(R.id.state_view)
                 if (other is IStateView<*>) {
-                    StateViewHelper.hideStateView(other as IStateView<StateProperty>?)
+                    StateViewHelper.hideStateView(other as? IStateView<StateProperty>)
                 }
             }
         }
@@ -174,7 +174,6 @@ class StateManager protected constructor(private val context: Context) : IStateV
     }
 
     fun setStateRepository(stateRepository: StateViewRepository) {
-
         val iStateView = this.stateRepository.get(CoreStateView.STATE)
         iStateView?.let {
             stateRepository.addState(it)

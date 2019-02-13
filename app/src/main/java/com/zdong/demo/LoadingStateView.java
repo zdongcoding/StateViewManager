@@ -29,6 +29,6 @@ public class LoadingStateView extends BaseStateView {
 
     @Override
     public ShowState getShowState() {
-        return ShowState.getInstance.getSTACK();
+        return ShowState.STACK;
     }
 }

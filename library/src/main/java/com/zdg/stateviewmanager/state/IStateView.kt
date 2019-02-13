@@ -67,32 +67,8 @@ interface IStateView<T : StateProperty> {
      */
     fun setViewProperty(stateProperty: T)
 
-    class ShowState private constructor(index: Int) {
-        var index: Int = 0
-            internal set
-
-        init {
-            this.index = index
-        }
-
-        companion object getInstance{
-            /**
-             * 只显示State显示的位置
-             */
-            var ONLY = ShowState(-1)
-            /**
-             *
-             */
-            var STACK = ShowState(0)
-
-            /**
-             *
-             * @param index ViewGroup（mOverallView#addView(index）
-             * @return ShowState
-             */
-            fun INDEX(index: Int): ShowState {
-                return ShowState(index)
-            }
-        }
+    enum class ShowState(var index:Int) {
+        ONLY(-1),STACK(0);
     }
+
 }
