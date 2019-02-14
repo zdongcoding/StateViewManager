@@ -19,8 +19,6 @@ import com.zdong.stateviewmanager.R
  * 状态管理类
  */
 class StateManager private constructor(private val context: Context) : IStateViewManager {
-
-
     /**
      * 所有 状态管理的配置
      */
@@ -29,10 +27,10 @@ class StateManager private constructor(private val context: Context) : IStateVie
     /**
      * 当前显示的状态
      */
-    private  var currentState: IStateView<StateProperty>?=null
+    private var currentState: IStateView<StateProperty>? = null
 
     private var listener: StateActionListener? = null
-    override  var overallView: ViewGroup?=null
+    override var overallView: ViewGroup? = null
 
     override val state: String
         get() = if (currentState == null) BaseStateView.STATE else currentState!!.state
@@ -41,7 +39,19 @@ class StateManager private constructor(private val context: Context) : IStateVie
         get() = getStateView(CoreStateView.STATE)!!
 
     /*------------------------StateObserver------------------------------*/
+    override fun hideState(state: String): Boolean {
+        val iState = stateRepository[state]
+        if (iState == null) {
+            Log.e("StateManager", "没有找到对应的" + state + "State，需要调用addState()进行注册")
+            return false
+        }
+        return StateViewHelper.hideStateView(iState)
+    }
     override fun showState(state: String): Boolean {
+       return showState(state,null)
+    }
+
+    override fun showState(state: String, showState: IStateView.ShowState?): Boolean {
         if (overallView == null || TextUtils.isEmpty(state)) {
             return false
         }
@@ -51,6 +61,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
             Log.e("StateManager", "没有找到对应的" + state + "State，需要调用addState()进行注册")
             return false
         }
+        iState.showState = showState ?: iState.showState
         iState.setStateActionListener(listener)
         val isSuccess = StateViewHelper.showStateView(context, overallView, iState)
         if (!isSuccess) {
@@ -60,21 +71,37 @@ class StateManager private constructor(private val context: Context) : IStateVie
             return true
         }
         if (iState.showState === IStateView.ShowState.ONLY) {
-            StateViewHelper.hideStateView(currentState)
+//            StateViewHelper.hideStateView(currentState)
+            hideOtherStateView(iState)
         }
         currentState = iState
-        hideOtherStateView(currentState)
         return true
     }
 
+    override fun showState(state: StateProperty): Boolean {
+        return showState(state,null)
+    }
+
+    override fun showState(state: StateProperty, showState: IStateView.ShowState?): Boolean {
+        val result = showState(state.state, showState)
+        if (result) {
+            val baseStater = stateRepository[state.state]
+            baseStater?.setViewProperty(state)
+        }
+        return result
+    }
+
     private fun hideOtherStateView(stater: IStateView<StateProperty>?) {
-        stater?.let {
-            val parent = it.view?.parent as ViewGroup
-            val index = parent.indexOfChild(it.view)
-            for (childCount in parent.childCount - 1 downTo index + 1) {
+        if (stater == null) {
+            return
+        }
+        val view = stater.view
+        overallView?.let {
+            val index = it.indexOfChild(view)
+            for (childCount in it.childCount - 1 downTo 0) {
                 //Object tag = parent.getChildAt(childCount).getTag(R.id.state_tag);
-                val other = parent.getChildAt(childCount).getTag(R.id.state_view)
-                if (other is IStateView<*>) {
+                val other = it.getChildAt(childCount).getTag(R.id.state_view)
+                if (childCount != index && other is IStateView<*> /*&& other.state != CoreStateView.STATE*/) {
                     StateViewHelper.hideStateView(other as? IStateView<StateProperty>)
                 }
             }
@@ -82,14 +109,6 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
     }
 
-    override fun showState(state:  StateProperty): Boolean {
-        val result = showState(state.state)
-        if (result) {
-            val baseStater = stateRepository[state.state]
-            baseStater?.setViewProperty(state)
-        }
-        return result
-    }
 
     override fun setStateActionListener(listener: StateActionListener) {
         this.listener = listener
@@ -135,13 +154,13 @@ class StateManager private constructor(private val context: Context) : IStateVie
      *
      * @param stateView
      */
-    override fun  addState(stateView: IStateView<StateProperty>): Boolean {
-            stateView.setStateActionListener(listener)
-            //如果存在替换流程，需要将之前的StateView移除
-            if (!TextUtils.isEmpty(stateView.state)) {
-                removeState(stateView.state)
-            }
-            return stateRepository.addState(stateView)
+    override fun addState(stateView: IStateView<StateProperty>): Boolean {
+        stateView.setStateActionListener(listener)
+        //如果存在替换流程，需要将之前的StateView移除
+        if (!TextUtils.isEmpty(stateView.state)) {
+            removeState(stateView.state)
+        }
+        return stateRepository.addState(stateView)
     }
 
 
@@ -153,6 +172,8 @@ class StateManager private constructor(private val context: Context) : IStateVie
         //移除对应状态的同时，也需要移除对应的View
         if (stateView != null) {
             overallView!!.removeView(stateView)
+            val stateChanger = stateRepository[state]
+            stateChanger?.onStateDestroy()
         }
         return stateRepository.removeState(state)
     }
@@ -164,17 +185,12 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
     }
 
-    fun removeAllState() {
-        stateRepository.clear()
-        overallView!!.removeAllViews()
-    }
-
     fun getStateRepository(): StateViewRepository {
         return stateRepository
     }
 
     fun setStateRepository(stateRepository: StateViewRepository) {
-        val iStateView = this.stateRepository.get(CoreStateView.STATE)
+        val iStateView = this.stateRepository[CoreStateView.STATE]
         iStateView?.let {
             stateRepository.addState(it)
         }
@@ -182,11 +198,30 @@ class StateManager private constructor(private val context: Context) : IStateVie
     }
 
 
-    override fun onDestoryView() {
+    override fun onDestroyView() {
+        overallView?.let {
+            val childCount = it.childCount
+            var arrayview= mutableListOf<View>()
+            for (index in 0 until childCount){
+                val childAt = it.getChildAt(index)
+                val other = childAt.getTag(R.id.state_view)
+                if (other is IStateView<*>) {
+                    if (other.state != CoreStateView.STATE) {
+                        arrayview.add(childAt)
+                        val stateChanger = stateRepository[other.state]
+                        stateChanger?.onStateDestroy()
+                    }
+                }
+            }
+            for (view in arrayview) {
+                it.removeView(view)
+            }
+
+        }
         stateRepository.clear()
     }
 
-    companion object INSTACE{
+    companion object INSTACE {
 
         fun newInstance(context: Context, repository: StateViewRepository): StateManager {
             val stateManager = StateManager(context)

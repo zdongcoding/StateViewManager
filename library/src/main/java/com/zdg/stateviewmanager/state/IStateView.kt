@@ -11,8 +11,7 @@ import com.zdg.stateviewmanager.mananger.StateActionListener
  * State生命周期管理
  */
 interface IStateView<T : StateProperty> {
-    val TAG: String
-        get() = "StateView"
+
     /**
      *
      * 获取当前状态
@@ -29,7 +28,7 @@ interface IStateView<T : StateProperty> {
      */
     val view: View?
 
-    val showState: ShowState
+    var showState: ShowState
 
     /**
      * StateView创建后，可以做一些操作

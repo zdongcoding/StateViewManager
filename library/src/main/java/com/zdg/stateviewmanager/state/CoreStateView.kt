@@ -8,7 +8,7 @@ import android.view.View
 
 class CoreStateView : BaseStateView<StateProperty> {
 
-    override var state = "$STATE"
+    override var state = STATE
 
 
     override val layoutId: Int
@@ -42,9 +42,6 @@ class CoreStateView : BaseStateView<StateProperty> {
     override fun onViewCreated(stateView: View) {
 
     }
-
-    override val showState: IStateView.ShowState
-        get() = IStateView.ShowState.STACK
 
 
     companion object {

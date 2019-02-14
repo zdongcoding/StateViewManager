@@ -52,8 +52,8 @@ class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
             mStateManager.setContentView(child)
         }
     }
-    override fun addState(iStateView: IStateView<StateProperty>): Boolean {
-        return mStateManager.addState(iStateView)
+    override fun addState(stateView: IStateView<StateProperty>): Boolean {
+        return mStateManager.addState(stateView)
     }
 
     override fun removeState(state: String): Boolean {
@@ -63,21 +63,29 @@ class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
     override fun getStateView(state: String): View? {
         return mStateManager.getStateView(state)
     }
-
     override fun showState(state: String): Boolean {
-        return mStateManager.showState(state)
+        return showState(state,null)
     }
 
     override fun showState(state: StateProperty): Boolean {
-        return mStateManager.showState(state)
+        return showState(state,null)
     }
 
+    override fun showState(state: String,showState: IStateView.ShowState?): Boolean {
+        return mStateManager.showState(state)
+    }
+    override fun showState(state: StateProperty,showState: IStateView.ShowState?): Boolean {
+        return mStateManager.showState(state)
+    }
+    override fun hideState(state: String): Boolean {
+        return mStateManager.hideState(state)
+    }
     override fun setStateActionListener(listener: StateActionListener) {
         mStateManager.setStateActionListener(listener)
     }
 
-    override fun onDestoryView() {
-        mStateManager.onDestoryView()
+    override fun onDestroyView() {
+        mStateManager.onDestroyView()
     }
 
 

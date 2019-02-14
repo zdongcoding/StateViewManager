@@ -6,7 +6,7 @@ package com.zdg.stateviewmanager.mananger
  */
 interface StateViewChanger : StateChanger {
     /**
-     * onDestoryView
+     * onDestroyView
      */
-    fun onDestoryView()
+    fun onDestroyView()
 }

@@ -18,7 +18,7 @@ interface StateLoader<T> {
      *
      * @param changger
      */
-    fun   addState(iStateView: IStateView<StateProperty>): Boolean
+    fun   addState(stateView: IStateView<StateProperty>): Boolean
 
     /**
      * 如果对应的状态加载器

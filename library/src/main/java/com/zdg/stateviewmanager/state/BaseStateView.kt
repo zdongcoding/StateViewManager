@@ -26,10 +26,10 @@ abstract class BaseStateView<T : StateProperty> : IStateView<T> {
     /**
      * 状态属性：动态文案
      */
-    lateinit var stateProperty: T
+    private lateinit var stateProperty: T
 
-    override  val showState: IStateView.ShowState
-        get() = IStateView.ShowState.ONLY
+    override  var showState: IStateView.ShowState=IStateView.ShowState.ONLY
+
     /**
      * 视图状态里面的按钮监听
      */

@@ -20,11 +20,11 @@ class StateViewRepository(private var mContext: Context) : StateLoader<View> {
      * 用于映射State和具体State对象
      */
     var stateMap = HashMap<String, IStateView<StateProperty>>(5)
-        protected set
+        private set
 
-    override fun   addState(iStateView: IStateView<StateProperty>): Boolean {
-        if (!TextUtils.isEmpty(iStateView.state)) {
-            stateMap[iStateView.state] = iStateView
+    override fun   addState(stateView: IStateView<StateProperty>): Boolean {
+        if (!TextUtils.isEmpty(stateView.state)) {
+            stateMap[stateView.state] = stateView
             return true
         }
 
@@ -33,8 +33,6 @@ class StateViewRepository(private var mContext: Context) : StateLoader<View> {
 
     override fun removeState(state: String): Boolean {
         if (!TextUtils.isEmpty(state)) {
-            val iStateView = get(state)
-            iStateView?.onStateDestroy()
             stateMap.remove(state)
             return true
         }
@@ -81,6 +79,7 @@ class StateViewRepository(private var mContext: Context) : StateLoader<View> {
          * @param state
          * @param clazz
          */
+        @JvmStatic
         fun registerState(state: String, clazz: Class<*>) {
             stateClazzMap[state] = clazz
         }
@@ -89,6 +88,7 @@ class StateViewRepository(private var mContext: Context) : StateLoader<View> {
          * 注销 状态
          * @param state
          */
+        @JvmStatic
         fun unregisterState(state: String) {
             stateClazzMap.remove(state)
         }
@@ -96,7 +96,7 @@ class StateViewRepository(private var mContext: Context) : StateLoader<View> {
         /**
          * 用于映射 State 和 Class对象
          */
-        protected var stateClazzMap = HashMap<String, Class<*>>(5)
+        private var stateClazzMap = HashMap<String, Class<*>>(5)
     }
 
 }

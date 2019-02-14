@@ -36,9 +36,10 @@ internal object StateViewHelper {
             if (staterView==null) {
                 return  false
             }
-            staterView.setTag(R.id.state_view, stater)
-            staterView.setTag(R.id.state_tag, stater.state)
+            staterView.visibility=View.GONE
         }
+        staterView.setTag(R.id.state_view, stater)
+        staterView.setTag(R.id.state_tag, stater.state)
         var layoutParams: ViewGroup.LayoutParams? = overallView.layoutParams
         if (layoutParams == null) {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -59,8 +60,10 @@ internal object StateViewHelper {
             }
         }
         stater.view?.let {
-            it.visibility = View.VISIBLE
-            stater.onStateResume()
+            if (it.visibility != View.VISIBLE) {
+                it.visibility = View.VISIBLE
+                stater.onStateResume()
+            }
         }
         return true
     }
@@ -77,8 +80,10 @@ internal object StateViewHelper {
             return false
         }
         stater.view?.let {
-            it.visibility = View.GONE
-            stater.onStatePause()
+            if (it.visibility == View.VISIBLE) {
+                it.visibility = View.GONE
+                stater.onStatePause()
+            }
         }
 
         return true

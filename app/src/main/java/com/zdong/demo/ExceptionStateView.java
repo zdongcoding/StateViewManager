@@ -36,10 +36,6 @@ public class ExceptionStateView extends BaseStateView<ExceptionData> {
         btn_report.setText(stateProperty.msg);
     }
 
-    @Override
-    public ShowState getShowState() {
-        return ShowState.ONLY;
-    }
 
     @Override
     public String getState() {
