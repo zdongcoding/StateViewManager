@@ -40,7 +40,6 @@ abstract class BaseStateView<T : StateProperty> : IStateView<T> {
     protected abstract val layoutId: Int
 
     override fun onStateCreate(context: Context, parent: ViewGroup) {
-        Log.d(TAG, "onStateCreate====context = [$context], parent = [$parent]")
         this.context = context
         this.mOverallView = parent
         stateView = LayoutInflater.from(context).inflate(layoutId, parent, false)
@@ -67,26 +66,27 @@ abstract class BaseStateView<T : StateProperty> : IStateView<T> {
     protected abstract fun onViewCreated(stateView: View)
 
     override fun onStateResume() {
-        Log.d(TAG, "onStateResume====$state")
+        if(DEBUG)Log.d(TAG, "onStateResume====$state")
     }
 
     override fun onStatePause() {
-        Log.d(TAG, "onStatePause====$state")
+        if(DEBUG)Log.d(TAG, "onStatePause====$state")
     }
 
     override fun onStateDestroy() {
-        Log.d(TAG, "onStateDestroy====$state")
+        if(DEBUG)Log.d(TAG, "onStateDestroy====$state")
     }
 
 
 
 
     protected fun actionListener(view: View) {
-         listener?.onActionListener(state, view)
+         listener?.onActionListener(state, view,stateProperty)
     }
 
     companion object {
         const val TAG = "BaseStateView"
         const val STATE = "NONE"
+        var DEBUG=false
     }
 }

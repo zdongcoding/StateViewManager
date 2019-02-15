@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 
-import com.zdg.stateviewmanager.creator.StateViewRepository
+import com.zdg.stateviewmanager.creator.StateViewStore
 import com.zdg.stateviewmanager.state.BaseStateView
 import com.zdg.stateviewmanager.state.CoreStateView
 import com.zdg.stateviewmanager.state.IStateView
@@ -22,7 +22,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
     /**
      * 所有 状态管理的配置
      */
-    private lateinit var stateRepository: StateViewRepository
+    private lateinit var stateStore: StateViewStore
 
     /**
      * 当前显示的状态
@@ -40,15 +40,12 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
     /*------------------------StateObserver------------------------------*/
     override fun hideState(state: String): Boolean {
-        val iState = stateRepository[state]
+        val iState = stateStore[state]
         if (iState == null) {
             Log.e("StateManager", "没有找到对应的" + state + "State，需要调用addState()进行注册")
             return false
         }
         return StateViewHelper.hideStateView(iState)
-    }
-    override fun showState(state: String): Boolean {
-       return showState(state,null)
     }
 
     override fun showState(state: String, showState: IStateView.ShowState?): Boolean {
@@ -56,7 +53,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
             return false
         }
 
-        val iState = stateRepository[state]
+        val iState = stateStore[state]
         if (iState == null) {
             Log.e("StateManager", "没有找到对应的" + state + "State，需要调用addState()进行注册")
             return false
@@ -78,14 +75,10 @@ class StateManager private constructor(private val context: Context) : IStateVie
         return true
     }
 
-    override fun showState(state: StateProperty): Boolean {
-        return showState(state,null)
-    }
-
     override fun showState(state: StateProperty, showState: IStateView.ShowState?): Boolean {
         val result = showState(state.state, showState)
         if (result) {
-            val baseStater = stateRepository[state.state]
+            val baseStater = stateStore[state.state]
             baseStater?.setViewProperty(state)
         }
         return result
@@ -112,7 +105,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
     override fun setStateActionListener(listener: StateActionListener) {
         this.listener = listener
-        val iterator = stateRepository.stateMap.values.iterator()
+        val iterator = stateStore.stateMap.values.iterator()
         while (iterator.hasNext()) {
             val stateChanger = iterator.next()
             stateChanger.setStateActionListener(listener)
@@ -160,7 +153,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
         if (!TextUtils.isEmpty(stateView.state)) {
             removeState(stateView.state)
         }
-        return stateRepository.addState(stateView)
+        return stateStore.addState(stateView)
     }
 
 
@@ -172,29 +165,29 @@ class StateManager private constructor(private val context: Context) : IStateVie
         //移除对应状态的同时，也需要移除对应的View
         if (stateView != null) {
             overallView!!.removeView(stateView)
-            val stateChanger = stateRepository[state]
+            val stateChanger = stateStore[state]
             stateChanger?.onStateDestroy()
         }
-        return stateRepository.removeState(state)
+        return stateStore.removeState(state)
     }
 
     override fun getStateView(state: String): View? {
 
-        val stateChanger = stateRepository[state]
+        val stateChanger = stateStore[state]
         return stateChanger?.view
 
     }
 
-    fun getStateRepository(): StateViewRepository {
-        return stateRepository
+    fun getStateRepository(): StateViewStore {
+        return stateStore
     }
 
-    fun setStateRepository(stateRepository: StateViewRepository) {
-        val iStateView = this.stateRepository[CoreStateView.STATE]
+    fun setStateRepository(stateStore: StateViewStore) {
+        val iStateView = this.stateStore[CoreStateView.STATE]
         iStateView?.let {
-            stateRepository.addState(it)
+            stateStore.addState(it)
         }
-        this.stateRepository = stateRepository
+        this.stateStore = stateStore
     }
 
 
@@ -208,7 +201,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
                 if (other is IStateView<*>) {
                     if (other.state != CoreStateView.STATE) {
                         arrayview.add(childAt)
-                        val stateChanger = stateRepository[other.state]
+                        val stateChanger = stateStore[other.state]
                         stateChanger?.onStateDestroy()
                     }
                 }
@@ -218,20 +211,20 @@ class StateManager private constructor(private val context: Context) : IStateVie
             }
 
         }
-        stateRepository.clear()
+        stateStore.clear()
     }
 
     companion object INSTACE {
 
-        fun newInstance(context: Context, repository: StateViewRepository): StateManager {
+        fun newInstance(context: Context, store: StateViewStore): StateManager {
             val stateManager = StateManager(context)
-            stateManager.stateRepository = repository
+            stateManager.stateStore = store
             return stateManager
         }
 
-        fun newInstance(context: Context, repository: StateViewRepository, overallView: ViewGroup): StateManager {
+        fun newInstance(context: Context, store: StateViewStore, overallView: ViewGroup): StateManager {
             val stateManager = StateManager(context)
-            stateManager.stateRepository = repository
+            stateManager.stateStore = store
             stateManager.overallView = overallView
             return stateManager
         }

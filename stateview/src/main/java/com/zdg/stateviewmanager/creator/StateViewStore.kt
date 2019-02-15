@@ -14,7 +14,7 @@ import java.util.HashMap
  * 状态仓库
  * @author zoudong
  */
-class StateViewRepository(private var mContext: Context) : StateLoader<View> {
+class StateViewStore(private var mContext: Context) : StateLoader<View> {
 
     /**
      * 用于映射State和具体State对象

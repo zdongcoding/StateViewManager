@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 
 import com.zdg.stateviewmanager.creator.StateLoader
-import com.zdg.stateviewmanager.creator.StateViewRepository
+import com.zdg.stateviewmanager.creator.StateViewStore
 import com.zdg.stateviewmanager.mananger.StateActionListener
 import com.zdg.stateviewmanager.mananger.StateManager
 import com.zdg.stateviewmanager.mananger.StateViewChanger
@@ -21,7 +21,7 @@ import com.zdg.stateviewmanager.state.StateProperty
  */
 class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
 
-    var mStateManager: StateManager = StateManager.newInstance(context, StateViewRepository(context), this)
+    var mStateManager: StateManager = StateManager.newInstance(context, StateViewStore(context), this)
 
     override val state: String
         get() = mStateManager.state
@@ -63,14 +63,6 @@ class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
     override fun getStateView(state: String): View? {
         return mStateManager.getStateView(state)
     }
-    override fun showState(state: String): Boolean {
-        return showState(state,null)
-    }
-
-    override fun showState(state: StateProperty): Boolean {
-        return showState(state,null)
-    }
-
     override fun showState(state: String,showState: IStateView.ShowState?): Boolean {
         return mStateManager.showState(state)
     }

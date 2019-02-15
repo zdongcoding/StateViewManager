@@ -23,7 +23,7 @@ interface StateChanger {
      * @param state 当前需要显示的view对应的状态
      * @return
      */
-    fun showState(state: String): Boolean
+    fun showState(state: String): Boolean = showState(state,null)
     fun showState(state: String,showState: IStateView.ShowState?): Boolean
     /**
      * 当前需要显示的StateView
@@ -40,7 +40,7 @@ interface StateChanger {
      * @param state 当前需要显示的view对应的状态
      * @return
      */
-    fun showState(state: StateProperty): Boolean
+    fun showState(state: StateProperty): Boolean = showState(state,null)
     fun showState(state: StateProperty,showState: IStateView.ShowState?): Boolean
 
     /**

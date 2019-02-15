@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StateViewManager</string>
+    <string name="show_state_only_str"> showState =  ONLY 时 StateView   会叠加后隐藏其他StateView(包括原View)</string>
+    <string name="show_state_stack_str">showState = STACK 时 StateView   会叠加</string>
 </resources>
