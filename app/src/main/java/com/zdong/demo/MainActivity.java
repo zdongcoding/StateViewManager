@@ -17,6 +17,10 @@ import com.zdg.stateviewmanager.mananger.StateActionListener;
 import com.zdg.stateviewmanager.mananger.StateViewChanger;
 import com.zdg.stateviewmanager.state.CoreStateView;
 import com.zdg.stateviewmanager.state.IStateView;
+import com.zdg.stateviewmanager.state.StateProperty;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         mObserver.setStateActionListener(new StateActionListener() {
             @Override
-            public void onActionListener(String state, View view) {
+            public void onActionListener(@NotNull String state, @NotNull View view, @Nullable StateProperty stateProperty) {
                 if (state == ExceptionStateView.STATE) {
                     if (view.getId()==R.id.btn_report) {
                         mObserver.showState(CoreStateView.STATE);
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeStateView(View view) {
-        mObserver.showState(LoadingStateView.STATE);
+//        mObserver.showState(LoadingStateView.STATE);
         mObserver.showState(LoadingStateView.STATE,showState);
         new Handler().postDelayed(new Runnable() {
             @Override

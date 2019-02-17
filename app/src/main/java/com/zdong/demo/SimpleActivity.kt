@@ -11,6 +11,7 @@ import com.zdg.stateviewmanager.mananger.StateActionListener
 import com.zdg.stateviewmanager.mananger.StateViewChanger
 import com.zdg.stateviewmanager.state.CoreStateView
 import com.zdg.stateviewmanager.state.IStateView
+import com.zdg.stateviewmanager.state.StateProperty
 import kotlinx.android.synthetic.main.simple_activity_layout.*
 
 class SimpleActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class SimpleActivity : AppCompatActivity() {
         stateViewChanger2 = StateManagerView.Builder(this).wrapper(container2).builder()
 
         stateViewChanger?.setStateActionListener( object : StateActionListener {
-            override fun onActionListener(state: String, view: View) {
+            override fun onActionListener(state: String, view: View, stateProperty: StateProperty?) {
                 if (state === ExceptionStateView.STATE) {
                     stateViewChanger?.showState(CoreStateView.STATE)
                 }
@@ -33,7 +34,7 @@ class SimpleActivity : AppCompatActivity() {
 
         })
         stateViewChanger2?.setStateActionListener( object : StateActionListener {
-            override fun onActionListener(state: String, view: View) {
+            override fun onActionListener(state: String, view: View, stateProperty: StateProperty?) {
                 if (state === ExceptionStateView.STATE) {
                     stateViewChanger2?.showState(CoreStateView.STATE)
                 }

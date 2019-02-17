@@ -64,10 +64,10 @@ class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
         return mStateManager.getStateView(state)
     }
     override fun showState(state: String,showState: IStateView.ShowState?): Boolean {
-        return mStateManager.showState(state)
+        return mStateManager.showState(state,showState)
     }
     override fun showState(state: StateProperty,showState: IStateView.ShowState?): Boolean {
-        return mStateManager.showState(state)
+        return mStateManager.showState(state,showState)
     }
     override fun hideState(state: String): Boolean {
         return mStateManager.hideState(state)
@@ -89,7 +89,7 @@ class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
             return this
         }
 
-        fun builder(): StateViewChanger {
+        fun builder(): StateManagerView {
             return mStateManagerView
         }
     }

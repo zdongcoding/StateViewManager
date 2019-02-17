@@ -5,6 +5,7 @@ import android.view.View;
 import com.zdg.stateviewmanager.state.BaseStateView;
 
 
+
 public class LoadingStateView extends BaseStateView {
     public static final String STATE = "loading_state";
     @Override

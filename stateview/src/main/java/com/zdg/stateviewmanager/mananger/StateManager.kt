@@ -58,7 +58,6 @@ class StateManager private constructor(private val context: Context) : IStateVie
             Log.e("StateManager", "没有找到对应的" + state + "State，需要调用addState()进行注册")
             return false
         }
-        iState.showState = showState ?: iState.showState
         iState.setStateActionListener(listener)
         val isSuccess = StateViewHelper.showStateView(context, overallView, iState)
         if (!isSuccess) {
@@ -67,7 +66,9 @@ class StateManager private constructor(private val context: Context) : IStateVie
         if (state == currentState?.state) {
             return true
         }
-        if (iState.showState === IStateView.ShowState.ONLY) {
+        println("${iState.showState}  =  ${iState.showState==IStateView.ShowState.ONLY}")
+        val showState=showState?:iState.showState
+        if (showState == IStateView.ShowState.ONLY) {
 //            StateViewHelper.hideStateView(currentState)
             hideOtherStateView(iState)
         }
