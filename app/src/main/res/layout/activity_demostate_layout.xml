@@ -15,4 +15,4 @@
         android:background="@color/colorAccent"
         android:onClick="changeStateView"
         android:text="点击加载" />
-</>
+</FrameLayout>

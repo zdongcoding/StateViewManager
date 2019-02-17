@@ -66,7 +66,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
         if (state == currentState?.state) {
             return true
         }
-        println("${iState.showState}  =  ${iState.showState==IStateView.ShowState.ONLY}")
+//        println("${iState.showState}  =  ${iState.showState==IStateView.ShowState.ONLY}")
         val showState=showState?:iState.showState
         if (showState == IStateView.ShowState.ONLY) {
 //            StateViewHelper.hideStateView(currentState)
