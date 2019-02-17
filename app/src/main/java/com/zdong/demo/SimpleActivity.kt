@@ -61,7 +61,6 @@ class SimpleActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        Log.e("zoudong", "onDestroy    ==> " + "");
         stateViewChanger?.onDestroyView()
         super.onDestroy()
     }

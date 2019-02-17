@@ -34,7 +34,7 @@ ext{
     bintrayRepo = 'maven'
     bintrayName = 'stateview'
 
-    publishedGroupId = 'com.zdg'
+    publishedGroupId = 'com.zdg.android'
     libraryName = 'stateview'
     artifact = 'stateview'
     maturity ='Development'
@@ -43,7 +43,7 @@ ext{
     siteUrl = 'https://github.com/zdongcoding/StateViewManager'
     gitUrl = 'https://github.com/zdongcoding/StateViewManager.git'
     issueUrl='https://github.com/zdongcoding/StateViewManager/issues'
-    libraryVersion = '0.0.1-beta'
+    libraryVersion = '0.0.1'
     alllabels = ['android']
     developerId = 'zdongcoding'
     developerName = 'zoudong'
