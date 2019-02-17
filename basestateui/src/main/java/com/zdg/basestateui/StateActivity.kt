@@ -11,6 +11,10 @@ import com.zdg.stateviewmanager.state.CoreStateView
 import com.zdg.stateviewmanager.state.IStateView
 import com.zdg.stateviewmanager.state.StateProperty
 
+/**
+ * 状态设置 Activity
+ * @author zouodng
+ */
 open class StateActivity:AppCompatActivity(), StateViewChanger {
 
     var mStateManager:StateManager?=null
