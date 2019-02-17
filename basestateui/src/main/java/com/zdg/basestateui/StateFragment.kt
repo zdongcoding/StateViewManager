@@ -15,15 +15,13 @@ import com.zdg.stateviewmanager.state.StateProperty
 open class StateFragment : Fragment(), StateViewChanger {
 
     var mStateManager: StateManager?=null
-    init {
-        println("init ${this.context}")
-    }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         mStateManager= StateManager.newInstance(context!!, StateViewStore(context))
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        println("onViewCreated ${this.mStateManager}")
         mStateManager?.setContentView(view)
     }
 
