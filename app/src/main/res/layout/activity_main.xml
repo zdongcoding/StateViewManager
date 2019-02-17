@@ -7,20 +7,6 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv_hello"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:onClick="changeStateView"
-        android:text="Kotlin 使用方式"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tv_show_state_msg"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -50,4 +36,51 @@
         app:layout_constraintRight_toRightOf="@id/tv_show_state"
         app:layout_constraintTop_toTopOf="@id/tv_show_state" />
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sw">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_hello"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:onClick="changeStateView"
+            android:text="Kotlin 使用方式" />
+        <TextView
+            android:id="@+id/tv_activity"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:onClick="skipActivity"
+            android:text="点击进入Activity\n( extends StateActivity方式)" />
+        <TextView
+            android:id="@+id/tv_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:onClick="commitfragment"
+            android:text="点击进入Fragment\n( extends StateFragment方式)" />
+        </LinearLayout>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

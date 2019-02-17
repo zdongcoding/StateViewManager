@@ -79,4 +79,12 @@ public class MainActivity extends AppCompatActivity {
             }
         },5000);
     }
+
+    public void commitfragment(View view) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new DemoFragment(), "demofragment").commitNow();
+    }
+
+    public void skipActivity(View view) {
+        startActivity(new Intent(this,DemoStateUIActivity.class));
+    }
 }

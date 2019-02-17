@@ -1,1 +1,1 @@
-include ':app', ':stateview'
+include ':app', ':stateview', ':basestateui'

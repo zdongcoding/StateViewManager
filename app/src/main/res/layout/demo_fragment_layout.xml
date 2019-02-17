@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#fff"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="这是fragment  extends StateFragment"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_fragment"
+            android:layout_width="match_parent"
+            android:text="获取数据"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:id="@+id/container2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="局部View"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_fragment2"
+                android:layout_width="match_parent"
+                android:text="获取数据"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
