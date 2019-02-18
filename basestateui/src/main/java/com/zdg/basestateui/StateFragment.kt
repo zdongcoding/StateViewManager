@@ -3,7 +3,9 @@ package com.zdg.basestateui
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.zdg.stateviewmanager.creator.StateViewStore
 import com.zdg.stateviewmanager.mananger.StateActionListener
 import com.zdg.stateviewmanager.mananger.StateManager
@@ -31,7 +33,6 @@ open class StateFragment : Fragment(), StateViewChanger {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mStateManager?.setContentView(view)
     }
-
 
 
     override val state: String

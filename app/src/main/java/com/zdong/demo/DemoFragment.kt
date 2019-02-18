@@ -2,6 +2,7 @@ package com.zdong.demo
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,16 +20,28 @@ import kotlinx.android.synthetic.main.demo_fragment_layout.*
 class DemoFragment : StateFragment() {
 
     private var stateViewChanger: StateViewChanger? = null
-
+    object Instance{
+        fun newInstance(index:Int):DemoFragment{
+            val demoFragment = DemoFragment()
+           var bundle= Bundle()
+            bundle.putInt("index", index)
+            demoFragment.arguments=bundle;
+            return demoFragment
+        }
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.e("zoudong", "onCreateView    ==> " + "inflater = [${inflater}], container = [${container}], savedInstanceState = [${savedInstanceState}]");
+
+
         return inflater.inflate(R.layout.demo_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        Log.e("zoudong", "onViewCreated    ==> " + "view = [${view}], ${arguments?.get("index")}");
+//        super.onViewCreated(view, savedInstanceState)
         stateViewChanger = StateManagerView.Builder(this.context!!).wrapper(container2).builder()
 
-
+        tv_index.text="这是fragment  extends StateFragment ${arguments?.get("index")}"
         btn_fragment.setOnClickListener {
             showState(LoadingStateView.STATE, IStateView.ShowState.ONLY)
             Toast.makeText(this@DemoFragment.context, "5s 出现异常数据  IStateView.ShowState.ONLY", Toast.LENGTH_SHORT).show()
