@@ -20,15 +20,19 @@ import com.zdg.stateviewmanager.state.StateProperty
 open class StateFragment : Fragment(), StateViewChanger {
 
     var mStateManager: StateManager?=null
-
+    protected open val isEnableStateView:Boolean = true
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        mStateManager= StateManager.newInstance(context!!, StateViewStore(context))
+        if (isEnableStateView) {
+             mStateManager= StateManager.newInstance(context!!, StateViewStore(context))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mStateManager?.setContentView(view)
     }
+
+
 
     override val state: String
         get() = mStateManager?.state ?: CoreStateView.STATE

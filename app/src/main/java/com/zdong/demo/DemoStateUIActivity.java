@@ -31,6 +31,7 @@ public class DemoStateUIActivity extends StateActivity{
         });
     }
 
+
     public void changeStateView(View view) {
          showState(LoadingStateView.STATE);
         new Handler().postDelayed(new Runnable() {

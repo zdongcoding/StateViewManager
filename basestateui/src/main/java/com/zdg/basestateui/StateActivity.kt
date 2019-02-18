@@ -18,15 +18,23 @@ import com.zdg.stateviewmanager.state.StateProperty
 open class StateActivity:AppCompatActivity(), StateViewChanger {
 
     var mStateManager:StateManager?=null
+    protected open val isEnableStateView:Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
-        mStateManager = StateManager.newInstance(this, StateViewStore(this))
+        if(isEnableStateView){
+            mStateManager = StateManager.newInstance(this, StateViewStore(this))
+        }
         super.onCreate(savedInstanceState)
     }
     override fun setContentView(layoutResID: Int) {
-        super.setContentView(mStateManager?.setContentView(layoutResID))
+        if (mStateManager != null) {
+            super.setContentView(mStateManager?.setContentView(layoutResID))
+        } else {
+            super.setContentView(layoutResID)
+        }
+
     }
     override fun setContentView(view: View?) {
-        super.setContentView(mStateManager?.setContentView(view!!))
+        super.setContentView(mStateManager?.setContentView(view!!)?:view)
     }
     override val state: String
         get() = mStateManager?.state ?: CoreStateView.STATE
