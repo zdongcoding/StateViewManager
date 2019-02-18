@@ -29,16 +29,16 @@ class DemoFragment : StateFragment() {
             return demoFragment
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.e("zoudong", "onCreateView    ==> " + "inflater = [${inflater}], container = [${container}], savedInstanceState = [${savedInstanceState}]");
 
-
+    override val isEnableStateView: Boolean
+        get() = true
+    override fun getView(inflater: LayoutInflater, container: ViewGroup?): View? {
         return inflater.inflate(R.layout.demo_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.e("zoudong", "onViewCreated    ==> " + "view = [${view}], ${arguments?.get("index")}");
-//        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
         stateViewChanger = StateManagerView.Builder(this.context!!).wrapper(container2).builder()
 
         tv_index.text="这是fragment  extends StateFragment ${arguments?.get("index")}"
