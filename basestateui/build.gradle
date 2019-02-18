@@ -34,11 +34,11 @@ dependencies {
 }
 ext{
     bintrayRepo = 'maven'
-    bintrayName = 'stateview'
+    bintrayName = 'basestateui'
 
     publishedGroupId = 'com.zdg.android'
-    libraryName = 'stateview'
-    artifact = 'stateview'
+    libraryName = 'basestateui'
+    artifact = 'basestateui'
     maturity ='Development'
     libraryDescription = 'view state'
 
