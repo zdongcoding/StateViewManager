@@ -26,20 +26,17 @@ open class StateFragment : Fragment(), StateViewChanger {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (isEnableStateView) {
-             mStateManager= StateManager.newInstance(context!!, StateViewStore(context))
+             mStateManager= StateManager.newInstance(context!!, StateViewStore())
         }
     }
 
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return mStateManager?.setContentView(getView(inflater,container)!!)
+        return mStateManager?.setContentView(onContentView(inflater,container)!!)
     }
 
-    open fun getView(inflater: LayoutInflater, container: ViewGroup?):View?{
+    open fun onContentView(inflater: LayoutInflater, container: ViewGroup?):View?{
         return  null
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        mStateManager?.setContentView(view)
     }
 
 

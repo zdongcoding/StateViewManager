@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import com.zdg.basestateui.StateFragment
 import com.zdg.stateviewmanager.StateManagerView
@@ -23,25 +22,27 @@ class DemoFragment : StateFragment() {
     object Instance{
         fun newInstance(index:Int):DemoFragment{
             val demoFragment = DemoFragment()
+            println("DemoFragment index=${index}")
            var bundle= Bundle()
             bundle.putInt("index", index)
-            demoFragment.arguments=bundle;
+            demoFragment.arguments=bundle
             return demoFragment
         }
     }
 
     override val isEnableStateView: Boolean
         get() = true
-    override fun getView(inflater: LayoutInflater, container: ViewGroup?): View? {
+
+
+    override fun onContentView(inflater: LayoutInflater, container: ViewGroup?): View? {
         return inflater.inflate(R.layout.demo_fragment_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.e("zoudong", "onViewCreated    ==> " + "view = [${view}], ${arguments?.get("index")}");
+        Log.e("zoudong", "onViewCreated    ==> " + "view = [${container2}], ${arguments?.get("index")}")
         super.onViewCreated(view, savedInstanceState)
-        stateViewChanger = StateManagerView.Builder(this.context!!).wrapper(container2).builder()
 
-        tv_index.text="这是fragment  extends StateFragment ${arguments?.get("index")}"
+        tv_index.text="这是fragment  extends StateFragment 2222${arguments?.get("index")}"
         btn_fragment.setOnClickListener {
             showState(LoadingStateView.STATE, IStateView.ShowState.ONLY)
             Toast.makeText(this@DemoFragment.context, "5s 出现异常数据  IStateView.ShowState.ONLY", Toast.LENGTH_SHORT).show()
@@ -49,7 +50,7 @@ class DemoFragment : StateFragment() {
                 showState(ExceptionData("这是一条异常数据", "点击重试"))
             }, 5000)
         }
-
+        stateViewChanger = StateManagerView.Builder(this.context!!).wrapper(container2).builder()
         btn_fragment2.setOnClickListener {
             stateViewChanger?.showState(LoadingStateView.STATE)
             Toast.makeText(this@DemoFragment.context, "5s 出现异常数据", Toast.LENGTH_SHORT).show()
@@ -81,9 +82,10 @@ class DemoFragment : StateFragment() {
 
     }
 
+    override fun onDestroyView() {
+        println("onDestroy ${arguments?.get("index")}")
 
-    override fun onDestroy() {
+        super.onDestroyView()
         stateViewChanger?.onDestroyView()
-        super.onDestroy()
     }
 }

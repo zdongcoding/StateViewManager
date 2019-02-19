@@ -26,7 +26,7 @@ abstract class BaseStateView<T : StateProperty> : IStateView<T> {
     /**
      * 状态属性：动态文案
      */
-    private lateinit var stateProperty: T
+    private  var stateProperty: T?=null
 
     override  var showState: IStateView.ShowState=IStateView.ShowState.ONLY
 
@@ -87,6 +87,6 @@ abstract class BaseStateView<T : StateProperty> : IStateView<T> {
     companion object {
         const val TAG = "BaseStateView"
         const val STATE = "NONE"
-        var DEBUG=false
+        var DEBUG=true
     }
 }

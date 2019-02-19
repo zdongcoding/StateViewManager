@@ -117,22 +117,19 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
         if (overallView == null) {
             overallView = FrameLayout(context)
-            overallView!!.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            overallView?.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
-
         val view = LayoutInflater.from(context).inflate(resId, overallView, false)
         //注册核心view的State
         addState(CoreStateView(view))
         showState(CoreStateView.STATE)
-
         return overallView!!
     }
 
     override fun setContentView(view: View): View {
         if (overallView == null) {
-
             overallView = FrameLayout(context)
-            overallView!!.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            overallView?.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
         //注册核心view的State
         addState(CoreStateView(view))
@@ -165,7 +162,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
         val stateView = getStateView(state)
         //移除对应状态的同时，也需要移除对应的View
         if (stateView != null) {
-            overallView!!.removeView(stateView)
+            overallView?.removeView(stateView)
             val stateChanger = stateStore[state]
             stateChanger?.onStateDestroy()
         }
@@ -212,6 +209,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
             }
 
         }
+        overallView = null
         stateStore.clear()
     }
 

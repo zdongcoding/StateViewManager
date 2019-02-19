@@ -13,7 +13,7 @@
             android:id="@+id/tv_index"
             android:layout_width="match_parent"
             android:gravity="center"
-            android:text="这是fragment  extends StateFragment"
+            android:text="这是fragment  extends StateFragment   haha"
             android:layout_height="wrap_content" />
 
         <Button

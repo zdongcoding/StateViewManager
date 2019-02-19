@@ -21,7 +21,7 @@ open class StateActivity:AppCompatActivity(), StateViewChanger {
     protected open val isEnableStateView:Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         if(isEnableStateView){
-            mStateManager = StateManager.newInstance(this, StateViewStore(this))
+            mStateManager = StateManager.newInstance(this, StateViewStore())
         }
         super.onCreate(savedInstanceState)
     }

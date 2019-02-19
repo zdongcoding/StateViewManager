@@ -48,11 +48,12 @@ internal object StateViewHelper {
             if (staterView.parent == null) {
                 overallView.addView(staterView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
             } else if (staterView.parent !== overallView) {
+                println("$staterView")
                 val params = staterView.layoutParams
                 if (staterView.parent is ViewGroup) {
                     val staterViewParent = staterView.parent as ViewGroup
                     val ofChildIndex = staterViewParent.indexOfChild(staterView)
-                    staterViewParent.removeViewInLayout(staterView)
+                    staterViewParent.removeView(staterView)
                     overallView.addView(staterView, layoutParams)
                     staterViewParent.addView(overallView, ofChildIndex, params)
                 }

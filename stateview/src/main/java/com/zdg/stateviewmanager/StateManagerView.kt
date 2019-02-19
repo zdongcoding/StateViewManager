@@ -21,7 +21,7 @@ import com.zdg.stateviewmanager.state.StateProperty
  */
 class StateManagerView : FrameLayout, StateViewChanger, StateLoader<View> {
 
-    var mStateManager: StateManager = StateManager.newInstance(context, StateViewStore(context), this)
+    var mStateManager: StateManager = StateManager.newInstance(context, StateViewStore(), this)
 
     override val state: String
         get() = mStateManager.state

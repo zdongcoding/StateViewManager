@@ -1,6 +1,5 @@
 package com.zdg.stateviewmanager.creator
 
-import android.content.Context
 import android.text.TextUtils
 import android.view.View
 
@@ -14,7 +13,7 @@ import java.util.HashMap
  * 状态仓库
  * @author zoudong
  */
-class StateViewStore(private var mContext: Context) : StateLoader<View> {
+class StateViewStore : StateLoader<View> {
 
     /**
      * 用于映射State和具体State对象
