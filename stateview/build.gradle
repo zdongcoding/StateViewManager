@@ -43,7 +43,7 @@ ext{
     siteUrl = 'https://github.com/zdongcoding/StateViewManager'
     gitUrl = 'https://github.com/zdongcoding/StateViewManager.git'
     issueUrl='https://github.com/zdongcoding/StateViewManager/issues'
-    libraryVersion = '0.0.2-beta'
+    libraryVersion = '0.0.2'
     alllabels = ['android']
     developerId = 'zdongcoding'
     developerName = 'zoudong'

@@ -6,13 +6,13 @@
 
 ```
 
-implementation 'com.zdg.android:stateview:0.0.1'
+implementation 'com.zdg.android:stateview:0.0.2'
 
 ```
 or
 ```
 
-implementation 'com.zdg.android:basestateui:0.0.1'
+implementation 'com.zdg.android:basestateui:0.0.2'
 
 ```
 ###  stateview

@@ -30,7 +30,7 @@ dependencies {
     compileOnly 'com.android.support:appcompat-v7:28.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 //    api project(':stateview')
-    api 'com.zdg.android:stateview:0.0.2-beta'
+    api 'com.zdg.android:stateview:0.0.2'
 }
 ext{
     bintrayRepo = 'maven'
@@ -45,7 +45,7 @@ ext{
     siteUrl = 'https://github.com/zdongcoding/StateViewManager'
     gitUrl = 'https://github.com/zdongcoding/StateViewManager.git'
     issueUrl='https://github.com/zdongcoding/StateViewManager/issues'
-    libraryVersion = '0.0.2-beta2'
+    libraryVersion = '0.0.2'
     alllabels = ['android']
     developerId = 'zdongcoding'
     developerName = 'zoudong'
