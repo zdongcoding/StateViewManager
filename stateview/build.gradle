@@ -38,12 +38,12 @@ ext{
     libraryName = 'stateview'
     artifact = 'stateview'
     maturity ='Development'
-    libraryDescription = 'view state'
+    libraryDescription = 'view state manager'
 
     siteUrl = 'https://github.com/zdongcoding/StateViewManager'
     gitUrl = 'https://github.com/zdongcoding/StateViewManager.git'
     issueUrl='https://github.com/zdongcoding/StateViewManager/issues'
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2-beta'
     alllabels = ['android']
     developerId = 'zdongcoding'
     developerName = 'zoudong'

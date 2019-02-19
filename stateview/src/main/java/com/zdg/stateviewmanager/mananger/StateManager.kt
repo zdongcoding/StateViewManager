@@ -117,6 +117,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
 
         if (overallView == null) {
             overallView = FrameLayout(context)
+            overallView?.id=R.id.state_manager_view
             overallView?.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
         val view = LayoutInflater.from(context).inflate(resId, overallView, false)
@@ -129,6 +130,7 @@ class StateManager private constructor(private val context: Context) : IStateVie
     override fun setContentView(view: View): View {
         if (overallView == null) {
             overallView = FrameLayout(context)
+            overallView?.id=R.id.state_manager_view
             overallView?.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
         //注册核心view的State

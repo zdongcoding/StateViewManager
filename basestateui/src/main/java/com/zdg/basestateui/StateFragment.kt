@@ -19,7 +19,7 @@ import com.zdg.stateviewmanager.state.StateProperty
  * 状态设置 fragment
  * @author zouodng
  */
-open class StateFragment : Fragment(), StateViewChanger {
+abstract class StateFragment : Fragment(), StateViewChanger {
 
     var mStateManager: StateManager?=null
     protected open val isEnableStateView:Boolean = true
@@ -30,14 +30,12 @@ open class StateFragment : Fragment(), StateViewChanger {
         }
     }
 
-    final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return mStateManager?.setContentView(onContentView(inflater,container)!!)
+        return mStateManager?.setContentView(onContentView(inflater,container)!!)?:onContentView(inflater,container)
     }
 
-    open fun onContentView(inflater: LayoutInflater, container: ViewGroup?):View?{
-        return  null
-    }
+    abstract fun onContentView(inflater: LayoutInflater, container: ViewGroup?):View?
 
 
     override val state: String
