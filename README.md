@@ -135,4 +135,6 @@ public class DemoFragment extends StateFragment{
 
 
 ![DemoStateUIActivity](/img/Video_20190218_010123_190.gif)
+
+
 **[具体方法看Demo]**
